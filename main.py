@@ -1,5 +1,7 @@
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
 import time
 import os
 
@@ -14,7 +16,6 @@ driver = webdriver.Chrome(options=options)
 
 driver.get(LINKEDIN_URL)
 
-time.sleep(2)
 sign_in_button = driver.find_element(By.XPATH, '//*[@id="base-contextual-sign-in-modal"]/div/section/div/div/div/div[2]/button')
 sign_in_button.click()
 
@@ -23,9 +24,17 @@ email_field = driver.find_element(By.XPATH, '//*[@id="base-sign-in-modal_session
 email_field.send_keys(EMAIL)
 password_field = driver.find_element(By.XPATH, '//*[@id="base-sign-in-modal_session_password"]')
 password_field.send_keys(PASSWORD)
-
-time.sleep(2)
 next_sign_in_button = driver.find_element(By.XPATH, '//*[@id="base-sign-in-modal"]/div/section/div/div/form/div[2]/button')
 next_sign_in_button.click()
 
-driver.quit()
+time.sleep(15)
+jobs = driver.find_elements(By.XPATH, '/html/body/div[5]/div[3]/div[3]/div[2]/div/section[1]/div/div/ul/li')
+# jobs = driver.find_elements(By.CSS_SELECTOR, 'a span strong')
+for job in jobs:
+    print(job.text)
+    # try:
+    #     time.sleep(2)
+    #     job.click()
+    # except NoSuchElementException:
+    #     pass
+# driver.quit()
