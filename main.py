@@ -28,13 +28,15 @@ next_sign_in_button = driver.find_element(By.XPATH, '//*[@id="base-sign-in-modal
 next_sign_in_button.click()
 
 time.sleep(15)
+
+# TODO - Find elements value needs to be altered to access job elements
 jobs = driver.find_elements(By.XPATH, '/html/body/div[5]/div[3]/div[3]/div[2]/div/section[1]/div/div/ul/li')
 # jobs = driver.find_elements(By.CSS_SELECTOR, 'a span strong')
+
 for job in jobs:
-    print(job.text)
-    # try:
-    #     time.sleep(2)
-    #     job.click()
-    # except NoSuchElementException:
-    #     pass
+    try:
+        time.sleep(2)
+        job.click()
+    except NoSuchElementException:
+        continue
 # driver.quit()
